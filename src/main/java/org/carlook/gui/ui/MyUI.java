@@ -1,4 +1,4 @@
-package org.carlook.ui;
+package org.carlook.gui.ui;
 
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
@@ -38,7 +38,7 @@ public class MyUI extends UI {
 
         navi.addView(Views.MAIN, MainView.class);
         navi.addView(Views.PROFILE, ProfileView.class);
-        navi.addView(Views.REGISTRATION, RegistrationView.class);
+        navi.addView(Views.REGISTRATION, org.carlook.ui.gui.views.RegistrationView.class);
         navi.addView(Views.LOGIN, LoginView.class);
         navi.addView(Views.AUTO, AutoView.class);
         navi.addView(Views.RESERVIERUNG, ReservierungView.class);

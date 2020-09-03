@@ -32,7 +32,57 @@
 @import "../valo/valo.scss";
 
 @mixin mytheme {
+
   @include valo;
 
-  // Insert your own theme rules here
 }
+
+.hintergrundbild {
+                     background-image: url("traffic.jpg");
+                     background-position: left top;
+                     background-size: cover;}
+.schrift-willkommen{
+                     font-family: Lato, Helvetica, Roboto, sans-serif;
+                     font-size: larger;
+                     color: #ffffff;
+                   }
+
+.schrift-profil{
+  font-family: Lato, Helvetica, Roboto, sans-serif;
+  color: #ffffff;
+}
+.schrift-tabelle{
+  font-family: Lato, Helvetica, Roboto, sans-serif;
+  color: #000000;
+}
+
+.HomeButtonStyle{
+  cursor: pointer;
+}
+
+.hintergrundbild {
+  background-image: url("traffic.jpg");
+  background-position: left top;
+  background-size: cover;}
+
+.schrift-willkommen{
+  font-family: Lato, Helvetica, Roboto, sans-serif;
+  font-size: larger;
+  color: #ffffff;
+}
+
+.schrift-profil{
+  font-family: Lato, Helvetica, Roboto, sans-serif;
+  color: #ffffff;
+}
+.schrift-tabelle{
+  font-family: Lato, Helvetica, Roboto, sans-serif;
+  color: #000000;
+}
+
+.HomeButtonStyle{
+  cursor: pointer;
+}
+
+  // Insert your own theme rules here
+
