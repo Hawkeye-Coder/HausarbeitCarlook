@@ -90,7 +90,7 @@ public class RegistrationControl implements RegistrationControlInterface {
         if (registerUser) {
             UI.getCurrent().addWindow( new ConfirmationWindow("Registration erfolgreich!") );
             ( (MyUI)UI.getCurrent() ).setUserDTO(userDTO);
-            UI.getCurrent().getNavigator().navigateTo(Views.MAIN);
+            UI.getCurrent().getNavigator().navigateTo(Views.PROFILE);
         } else {
             throw new DatabaseException("Fehler bei Abschluß der Registration");
         }
