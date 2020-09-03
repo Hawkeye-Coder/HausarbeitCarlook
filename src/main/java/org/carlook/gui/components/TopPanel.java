@@ -1,10 +1,9 @@
 package org.carlook.gui.components;
-
+import org.carlook.gui.ui.MyUI;
 import com.vaadin.event.MouseEvents;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.*;
-import org.carlook.ui.gui.ui.MyUI;
 import org.carlook.model.objects.dto.UserDTO;
 import org.carlook.process.proxy.LoginControlProxy;
 import org.carlook.services.util.Roles;
