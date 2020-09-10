@@ -69,7 +69,7 @@ public class LoginControl implements LoginControlInterface {
             rs.close();
         }
         ((MyUI) UI.getCurrent() ).setUserDTO(userDTO); //Mockito zum Testen
-        UI.getCurrent().getNavigator().navigateTo(Views.MAIN);
+        UI.getCurrent().getNavigator().navigateTo(Views.PROFILE);
     }
 
     public void logoutUser() {

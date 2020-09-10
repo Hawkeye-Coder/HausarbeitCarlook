@@ -1,4 +1,4 @@
-package org.carlook.ui.gui.views;
+package org.carlook.gui.views;
 
 import com.vaadin.data.Binder;
 import com.vaadin.data.HasValue;
@@ -10,10 +10,7 @@ import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.*;
 import org.carlook.gui.components.TopPanel;
 import org.carlook.model.objects.dto.UserDTO;
-import org.carlook.process.exceptions.DatabaseException;
-import org.carlook.process.exceptions.EmailInUseException;
-import org.carlook.process.exceptions.EmptyFieldException;
-import org.carlook.process.exceptions.NoEqualPasswordException;
+import org.carlook.process.exceptions.*;
 import org.carlook.process.proxy.RegistrationControlProxy;
 import org.carlook.services.util.Views;
 
@@ -50,7 +47,8 @@ public class RegistrationView extends VerticalLayout implements View {
         fieldVorname.setPlaceholder("Max");
         fieldVorname.setRequiredIndicatorVisible(true);
         vornameBinder.forField(fieldVorname)
-                     .asRequired("Bitte geben Sie ihren Vornamen ein!")
+                .withValidator(str -> str.length() > 1, "Ihr Vorname muss mindestens 2 Zeichen lang sein!")
+                .asRequired("Bitte geben Sie ihren Vornamen ein!")
                      .bind(UserDTO::getVorname, UserDTO::setVorname);
         fieldVorname.setId("vorname");
 
@@ -60,6 +58,7 @@ public class RegistrationView extends VerticalLayout implements View {
         fieldNachname.setPlaceholder("Mustermann");
         fieldNachname.setRequiredIndicatorVisible(true);
         nachnameBinder.forField(fieldNachname)
+                .withValidator(str -> str.length() > 1, "Ihr Name muss mindestens 2 Zeichen lang sein!")
                 .asRequired("Bitte geben Sie ihren Nachnamen ein!")
                 .bind(UserDTO::getName, UserDTO::setName);
         fieldNachname.setId("nachname");
@@ -105,6 +104,7 @@ public class RegistrationView extends VerticalLayout implements View {
         fieldPassword2.setMaxLength(20);
         fieldPassword2.setRequiredIndicatorVisible(true);
         password2Binder.forField(fieldPassword2)
+                .withValidator(str -> str.equals(fieldPassword2.getValue()), "Die Passwörer stimmen nicht überein!")
                 .asRequired("Bitte wiederholen Sie Ihr Passwort!")
                 .bind(UserDTO::getPassword, UserDTO::setPassword);
         Label counter2 = new Label();
@@ -153,7 +153,8 @@ public class RegistrationView extends VerticalLayout implements View {
                     String regAs = radioButtonGroup.getValue();
 
                     //Eingabe überprüfen
-                    RegistrationControlProxy.getInstance().checkValid( email, emailBinder.isValid(), password1, password2 , password1Binder.isValid(), password2Binder.isValid(), checkboxBinder.isValid() );
+                    RegistrationControlProxy.getInstance().checkValid(vorname, vornameBinder.isValid(), nachname, nachnameBinder.isValid(),
+                            email, emailBinder.isValid(), password1, password2, password1Binder.isValid(), password2Binder.isValid(), checkboxBinder.isValid(), regAs);
 
                     //UserDTO erstellen
                     UserDTO userDTO = new UserDTO();
@@ -165,8 +166,9 @@ public class RegistrationView extends VerticalLayout implements View {
                     userDTO.setRole(regAs);
 
                     //User in der DB registrieren
-                    RegistrationControlProxy.getInstance().registerUser( userDTO );
-
+                    RegistrationControlProxy.getInstance().registerUser(userDTO);
+                }catch (NoVertrieblerException e){
+                    Notification.show("Email-Fehler", e.getReason(), Notification.Type.WARNING_MESSAGE);
                 } catch (NoEqualPasswordException e) {
                     Notification.show("Passwort-Fehler!", e.getReason(), Notification.Type.WARNING_MESSAGE);
                 } catch (DatabaseException e) {

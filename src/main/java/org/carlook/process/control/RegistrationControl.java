@@ -9,10 +9,7 @@ import org.carlook.model.dao.RoleDAO;
 import org.carlook.model.dao.UserDAO;
 import org.carlook.model.objects.dto.UserDTO;
 import org.carlook.process.Interfaces.RegistrationControlInterface;
-import org.carlook.process.exceptions.DatabaseException;
-import org.carlook.process.exceptions.EmailInUseException;
-import org.carlook.process.exceptions.EmptyFieldException;
-import org.carlook.process.exceptions.NoEqualPasswordException;
+import org.carlook.process.exceptions.*;
 import org.carlook.services.db.JDBCConnection;
 import org.carlook.services.util.Roles;
 import org.carlook.services.util.Views;
@@ -34,13 +31,19 @@ public class RegistrationControl implements RegistrationControlInterface {
         return registration;
     }
 
-    public void checkValid(String email, boolean emailBool, String password1, String password2, boolean password1Bool, boolean password2Bool, boolean checkBox) throws NoEqualPasswordException, DatabaseException, EmailInUseException, EmptyFieldException, SQLException {
-
+    public void checkValid(String vorname, boolean vornameBool, String nachname, boolean nachnameBool, String email,
+                           boolean emailBool, String password1, String password2, boolean password1Bool,
+                           boolean password2Bool, boolean roleButtonBool, String roleButton) throws NoEqualPasswordException, DatabaseException, EmailInUseException, EmptyFieldException, SQLException, NoVertrieblerException {
+        email += " ";
         //Eingabecheck
-        if (!emailBool || !password1Bool  || !password2Bool || !checkBox) {
-            throw new EmptyFieldException("Bitte ergänzen Sie Ihre Eingaben in den makierten Bereichen!");
+        if (!vornameBool || !nachnameBool || !emailBool || !password1Bool  || !password2Bool || !roleButtonBool) {
+            throw new EmptyFieldException("Bitte ergänzen Sie Ihre Eingaben in den markierten Bereichen!");
         }
-
+        if (roleButton.equals("Vertriebler") && !email.equals(vorname.toLowerCase()+ "." + nachname.toLowerCase() + "@carlook.de ")) {
+            throw new NoVertrieblerException("Ihre Emailadresse entspricht nicht den Anforderungen um sich als Vertriebler registrieren zu können! \n " +
+                                            "(Beispiel: vorname.nachname@carlook.de) \n" +
+                                            "Bitte überprüfen Sie ihre Email-Adresse oder registrieren Sie sich als Kunde!");
+        }
         //Passwortcheck
         if ( !password1.equals(password2) ) {
             throw new NoEqualPasswordException("Passwörter stimmen nicht überein!");
