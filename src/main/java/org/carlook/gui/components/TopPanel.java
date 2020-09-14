@@ -97,7 +97,7 @@ public class  TopPanel extends HorizontalLayout {
                 });
             }
             if ( userDTO.hasRole(Roles.KUNDE) ) {
-                item1.addItem("Autos Suchen", VaadinIcons.SEARCH, new MenuBar.Command() {
+                item1.addItem("Autos suchen", VaadinIcons.SEARCH, new MenuBar.Command() {
                     @Override
                     public void menuSelected(MenuBar.MenuItem menuItem) {
                         UI.getCurrent().getNavigator().navigateTo(Views.MAIN);

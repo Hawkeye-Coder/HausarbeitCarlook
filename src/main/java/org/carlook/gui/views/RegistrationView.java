@@ -104,7 +104,6 @@ public class RegistrationView extends VerticalLayout implements View {
         fieldPassword2.setMaxLength(20);
         fieldPassword2.setRequiredIndicatorVisible(true);
         password2Binder.forField(fieldPassword2)
-                .withValidator(str -> str.equals(fieldPassword2.getValue()), "Die Passwörer stimmen nicht überein!")
                 .asRequired("Bitte wiederholen Sie Ihr Passwort!")
                 .bind(UserDTO::getPassword, UserDTO::setPassword);
         Label counter2 = new Label();

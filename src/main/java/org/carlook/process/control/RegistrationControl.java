@@ -34,12 +34,12 @@ public class RegistrationControl implements RegistrationControlInterface {
     public void checkValid(String vorname, boolean vornameBool, String nachname, boolean nachnameBool, String email,
                            boolean emailBool, String password1, String password2, boolean password1Bool,
                            boolean password2Bool, boolean roleButtonBool, String roleButton) throws NoEqualPasswordException, DatabaseException, EmailInUseException, EmptyFieldException, SQLException, NoVertrieblerException {
-        email += " ";
+        String emailCheck = email+" ";
         //Eingabecheck
         if (!vornameBool || !nachnameBool || !emailBool || !password1Bool  || !password2Bool || !roleButtonBool) {
             throw new EmptyFieldException("Bitte ergänzen Sie Ihre Eingaben in den markierten Bereichen!");
         }
-        if (roleButton.equals("Vertriebler") && !email.equals(vorname.toLowerCase()+ "." + nachname.toLowerCase() + "@carlook.de ")) {
+        if (roleButton.equals("Vertriebler") && !emailCheck.equals(vorname.toLowerCase()+ "." + nachname.toLowerCase() + "@carlook.de ")) {
             throw new NoVertrieblerException("Ihre Emailadresse entspricht nicht den Anforderungen um sich als Vertriebler registrieren zu können! \n " +
                                             "(Beispiel: vorname.nachname@carlook.de) \n" +
                                             "Bitte überprüfen Sie ihre Email-Adresse oder registrieren Sie sich als Kunde!");
@@ -68,8 +68,8 @@ public class RegistrationControl implements RegistrationControlInterface {
             if (rs.next()) {
                 throw new EmailInUseException("Die Email wird bereits benutzt!");
             }
-        } catch (SQLException throwables) {
-            throw new DatabaseException("Fehler bei set: Bitte den Programmierer informieren!");
+        } catch (EmailInUseException emailInUseException) {
+            throw new EmailInUseException("Die Email wird bereits benutzt!");
         } finally {
             assert rs != null;
             rs.close();
