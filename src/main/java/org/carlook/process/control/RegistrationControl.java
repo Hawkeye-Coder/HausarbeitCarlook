@@ -104,4 +104,10 @@ public class RegistrationControl implements RegistrationControlInterface {
     public void deleteUser(UserDTO userDTO){
         RegisterDAO.getInstance().deleteUser(userDTO);
     }
+
+    //Vertriebler löschen
+    @Override
+    public void deleteVertriebler(UserDTO user) {
+        RegisterDAO.getInstance().deleteVertriebler(user);
+    }
 }

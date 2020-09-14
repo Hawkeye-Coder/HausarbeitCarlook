@@ -12,7 +12,7 @@ import java.util.List;
 public class CreateAutoWindow extends Window {
 
     public CreateAutoWindow(AutoDTO autoDTO, Grid<AutoDTO> grid, VertrieblerDTO vertrieblerDTO) {
-        super("Ihre Autos");
+        super("Neues Auto");
         center();
 
         //Art
@@ -30,7 +30,7 @@ public class CreateAutoWindow extends Window {
         beschreibung.setValue(autoDTO.getBeschreibung());
 
 
-        //saveButton Config
+        //Speichern Button Konfiguration
         Button saveButton = new Button("Speichern");
         saveButton.addClickListener(new Button.ClickListener() {
             @Override
@@ -58,7 +58,7 @@ public class CreateAutoWindow extends Window {
             }
         });
 
-        //Abbrechen-Button Config
+        //Abbrechen Button Konfiguration
         Button abortButton = new Button("Abbrechen");
         abortButton.addClickListener(new Button.ClickListener() {
             @Override

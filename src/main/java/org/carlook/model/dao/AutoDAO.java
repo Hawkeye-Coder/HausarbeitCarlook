@@ -47,8 +47,7 @@ public class AutoDAO extends AbstractDAO {
         return list;
     }
 
-
-    //Erstellt ein neues Auto in der Datenbank
+    //Fügt ein neues Auto in der Datenbank ein
     public boolean createAuto(AutoDTO auto, UserDTO userDTO) {
         String sql = "INSERT INTO carlook.auto(id, marke, baujahr, beschreibung)" +
                 "VALUES (default, ?, ?, ?)";
@@ -74,7 +73,7 @@ public class AutoDAO extends AbstractDAO {
 
     }
 
-    //Trägt Vertriebler in die Liste ein
+    //Verbindet ein Auto mit einem Vertriebler
     private void connectAutoWithVertriebler(int idAuto, int idVertriebler) throws SQLException {
         String sql = "INSERT INTO carlook.auto_to_vertriebler (id_vertriebler, id_auto) VALUES (?,?)";
         PreparedStatement statement = this.getPreparedStatement(sql);
@@ -120,7 +119,7 @@ public class AutoDAO extends AbstractDAO {
             return false;
         }
     }
-    //Durchsucht die DB nach Suchkriterien
+    //Durchsucht die DB nach gewünschten Suchkriterien
     public List<AutoDTO> getAutoForSearch(String suchtext, String filter) throws SQLException {
         filter = filter.toLowerCase();
         PreparedStatement statement;
@@ -186,7 +185,7 @@ public class AutoDAO extends AbstractDAO {
         return listAuto;
     }
 
-    //Erzeugt die gewünschte Liste an gesuchten Autos
+    //Erzeugt eine Liste an gesuchten Autos
     private void buildList(ResultSet rs, List<AutoDTO> autoDTOList) throws SQLException {
 
         AutoDTO autoDTO;

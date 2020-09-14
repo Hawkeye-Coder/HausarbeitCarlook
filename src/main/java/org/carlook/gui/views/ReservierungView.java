@@ -40,12 +40,14 @@ public class ReservierungView extends VerticalLayout implements View {
         this.addComponent(line);
         line.setSizeFull();
         setStyleName("schrift-profil");
-        //Tabelle
+
+        //Tabelle erstellen
         final Grid<AutoDTO> grid = new Grid<>("Ihre Reservierungen");
         grid.setSizeFull();
         grid.setHeightMode(HeightMode.UNDEFINED);
         SingleSelect<AutoDTO> selection = grid.asSingleSelect();
         grid.setStyleName("schrift-tabelle");
+
         //Tabelle füllen
         try {
             list = AutoControlProxy.getInstance().getAutoForKunde(kundeDTO);
@@ -55,7 +57,7 @@ public class ReservierungView extends VerticalLayout implements View {
         BuildGrid.buildGrid(grid);
         grid.setItems(list);
 
-        //DeleteButton
+        //Delete Button
         Button deleteButton = new Button("Löschen");
         deleteButton.setEnabled(false);
 
@@ -73,7 +75,7 @@ public class ReservierungView extends VerticalLayout implements View {
             }
         });
 
-        //deleteButton Config
+        //DeleteButton Konfiguration
         deleteButton.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent clickEvent) {

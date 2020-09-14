@@ -15,11 +15,7 @@ public class UserDTO extends AbstractDTO implements Serializable {
     private String name;
     private String email;
     private String password;
-
-
-
-    private List<RoleDTO> roles = null;
-
+    private List<RoleDTO> rolle = null;
 
     public UserDTO() {}
     public UserDTO(UserDTO userDTO) {
@@ -29,9 +25,8 @@ public class UserDTO extends AbstractDTO implements Serializable {
         this.name = userDTO.name;
         this.email = userDTO.email;
         this.password = userDTO.password;
-        this.roles = userDTO.roles;
+        this.rolle = userDTO.rolle;
     }
-
 
     public String getAnrede() {
         return anrede;
@@ -70,13 +65,12 @@ public class UserDTO extends AbstractDTO implements Serializable {
     public void setEmail(String id) {
         this.email = id;
     }
-
+    //Überprüft ob einem User bereits eine Rolle zugeteilt wurde
     public boolean hasRole(String role){
-        if (this.roles == null) {
+        if (this.rolle == null) {
             getRoles();
-
         }
-        for(RoleDTO r : roles) {
+        for(RoleDTO r : rolle) {
             if (r.getBezeichnung().equals(role)) return true;
         }
         return false;
@@ -93,21 +87,22 @@ public class UserDTO extends AbstractDTO implements Serializable {
 
     public void getRoles() {
         try {
-            this.roles = RoleDAO.getInstance().getRolesForUser(this);
+            this.rolle = RoleDAO.getInstance().getRolesForUser(this);
         } catch (SQLException e) {
             Notification.show("Es ist ein SQL-Fehler aufgetreten. Bitte informieren Sie einen Administrator!", Notification.Type.ERROR_MESSAGE);
         }
 
     }
+
     public void setRole(String roles) {
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setBezeichnung(roles);
         List<RoleDTO> roleDTOList = new ArrayList<>();
         roleDTOList.add(roleDTO);
-        this.roles = roleDTOList;
+        this.rolle = roleDTOList;
     }
     public String getRole(){
-        return roles.get(0).getBezeichnung();
+        return rolle.get(0).getBezeichnung();
     }
 
 }

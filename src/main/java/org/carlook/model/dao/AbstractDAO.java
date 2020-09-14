@@ -6,7 +6,7 @@ import org.carlook.services.db.JDBCConnection;
 import java.sql.PreparedStatement;
 
 public class AbstractDAO {
-
+    //Nur PreparedStatement genutzt da sicherer
     protected PreparedStatement getPreparedStatement(String sql) {
         PreparedStatement statement = null;
 

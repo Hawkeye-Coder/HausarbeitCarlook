@@ -51,7 +51,9 @@ public class LoginView extends VerticalLayout implements View {
                 String password = passwordField.getValue();
 
                 try {
+                    //Daten prüfen
                     LoginControlProxy.getInstance().checkAuthentification(email, password);
+                    //Rückmeldungen abfangen
                 } catch (NoSuchUserOrPassword noSuchUserOrPassword) {
                     Notification.show("Benutzer-Fehler", "Es konnte kein User mit diesen Daten gefunden werden, bitte überpüfen Sie ihre Eingabe!", Notification.Type.ERROR_MESSAGE);
                 } catch (DatabaseException e) {

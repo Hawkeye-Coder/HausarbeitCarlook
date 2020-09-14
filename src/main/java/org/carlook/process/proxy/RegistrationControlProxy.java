@@ -35,4 +35,9 @@ public class RegistrationControlProxy implements RegistrationControlInterface {
     public void deleteUser(UserDTO userDTO){
         RegistrationControl.getInstance().deleteUser(userDTO);
     }
+
+    @Override
+    public void deleteVertriebler(UserDTO user) {
+        RegistrationControl.getInstance().deleteVertriebler(user);
+    }
 }

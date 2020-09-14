@@ -29,6 +29,7 @@ public class RegistrationView extends VerticalLayout implements View {
         this.addComponent(line);
         line.setSizeFull();
         setStyleName("schrift-profil");
+
         //Eingabefelder
 
         //Checkbox Anrede
@@ -74,7 +75,7 @@ public class RegistrationView extends VerticalLayout implements View {
                 .bind(UserDTO::getEmail, UserDTO::setEmail);
         fieldEmail.setId("email");
 
-        //Passwort setzen und Counter Label darunter
+        //Passwort setzen
         final Binder<UserDTO> password1Binder = new Binder<>();
         final PasswordField fieldPassword1 = new PasswordField("Passwort:");
         fieldPassword1.setPlaceholder("Passwort");
@@ -85,6 +86,8 @@ public class RegistrationView extends VerticalLayout implements View {
                 .withValidator(str -> str.length() < 21, "Ihr Passwort darf nicht mehr als 20 Zeichen enthalten!")
                 .asRequired("Bitte gegen Sie ein Passwort ein!")
                 .bind(UserDTO::getPassword, UserDTO::setPassword);
+
+        //Counter Passwort 1
         Label counter1 = new Label();
         counter1.setValue(fieldPassword1.getValue().length() + " of " + fieldPassword1.getMaxLength());
         fieldPassword1.addValueChangeListener(new HasValue.ValueChangeListener<String>() {
@@ -106,6 +109,8 @@ public class RegistrationView extends VerticalLayout implements View {
         password2Binder.forField(fieldPassword2)
                 .asRequired("Bitte wiederholen Sie Ihr Passwort!")
                 .bind(UserDTO::getPassword, UserDTO::setPassword);
+
+        //Counter Passwort 2
         Label counter2 = new Label();
         counter2.setValue(fieldPassword2.getValue().length() + " of " + fieldPassword2.getMaxLength());
         fieldPassword2.addValueChangeListener(new HasValue.ValueChangeListener<String>() {
@@ -128,7 +133,7 @@ public class RegistrationView extends VerticalLayout implements View {
                 .asRequired("Bitte wählen Sie!")
                 .bind(UserDTO::getRole, UserDTO::setRole);
 
-        //Register Button
+        //Registrierungs Button
         Button registerButton = new Button("Registrieren");
         registerButton.addClickListener(new Button.ClickListener() {
             @Override
@@ -182,7 +187,7 @@ public class RegistrationView extends VerticalLayout implements View {
             }
         });
 
-        //LoginButton
+        //Login Button
         Button loginButton = new Button("Zum Login");
         loginButton.addClickListener(new Button.ClickListener() {
             @Override

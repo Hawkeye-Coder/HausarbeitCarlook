@@ -16,4 +16,6 @@ public interface RegistrationControlInterface {
 
     //User Löschen
     void deleteUser(UserDTO userDTO);
+
+    void deleteVertriebler(UserDTO user);
 }

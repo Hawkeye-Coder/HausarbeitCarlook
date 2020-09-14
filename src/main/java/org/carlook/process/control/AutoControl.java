@@ -31,7 +31,6 @@ public class AutoControl implements AutoControlInterface {
 
     public List<AutoDTO> getAutoForKunde(KundeDTO kundeDTO) throws SQLException {
         return AutoDAO.getInstance().bereitsReservierteAutos(kundeDTO);
-
     }
 
     public void createAuto(AutoDTO autoDTO) throws AutoException {

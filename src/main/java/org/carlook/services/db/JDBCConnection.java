@@ -9,6 +9,7 @@ import java.util.Properties;
 
 public class JDBCConnection {
     private static JDBCConnection connection = null;
+    //Login Datenbank
     private String login = "mwinze2s";
     private String passwort = "mwinze2s";
     private String url = "jdbc:postgresql://dumbo.inf.h-brs.de/mwinze2s";
@@ -46,16 +47,6 @@ public class JDBCConnection {
         }
     }
 
-    public Statement getStatement() throws DatabaseException {
-        try {
-            if (this.conn.isClosed()) {
-                this.openConnection();
-            }
-            return this.conn.createStatement();
-        } catch (SQLException throwables) {
-            return null;
-        }
-    }
 
     public PreparedStatement getPreparedStatement(String sql ) throws DatabaseException {
         try {

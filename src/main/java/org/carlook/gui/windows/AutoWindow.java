@@ -20,7 +20,7 @@ public class AutoWindow extends Window {
 
     public AutoWindow(AutoDTO autoDTO, UserDTO userDTO) {
 
-        super(autoDTO.getMarke());
+        super("Auto reservieren?");
         center();
 
         //Marke
@@ -40,8 +40,8 @@ public class AutoWindow extends Window {
         beschreibung.setValue(autoDTO.getBeschreibung());
         beschreibung.setReadOnly(true);
 
-        //OkButton
-        Button okButton = new Button("Ok");
+        //Zurück Button
+        Button okButton = new Button("Zurück");
         okButton.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent clickEvent) {
@@ -49,7 +49,7 @@ public class AutoWindow extends Window {
             }
         });
 
-        //BewerbenButton
+        //Reservieren Button
         Button reservierenButton = new Button("Reservieren");
 
         reservierenButton.addClickListener(new Button.ClickListener() {

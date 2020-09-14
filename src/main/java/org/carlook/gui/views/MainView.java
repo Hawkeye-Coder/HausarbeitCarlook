@@ -30,19 +30,19 @@ public class MainView extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
-
-        UserDTO userDTO = ( (MyUI)UI.getCurrent() ).getUserDTO();
         this.setUp();
     }
 
     private void setUp() {
-        UserDTO userDTO = ( (MyUI)UI.getCurrent() ).getUserDTO();
+        UserDTO userDTO = ((MyUI) UI.getCurrent()).getUserDTO();
+
         //Top Layer
-        this.addComponent( new TopPanel() );
+        this.addComponent(new TopPanel());
         Label line = new Label("<hr>", ContentMode.HTML);
         this.addComponent(line);
         line.setSizeFull();
         setStyleName("schrift-profil");
+
         //Tabelle
         final Grid<AutoDTO> grid = new Grid<>("Ihre Treffer");
         grid.setSizeFull();
@@ -50,7 +50,8 @@ public class MainView extends VerticalLayout implements View {
         BuildGrid.buildGrid(grid);
         SingleSelect<AutoDTO> selection = grid.asSingleSelect();
         grid.setStyleName("schrift-tabelle");
-        //DetailButton
+
+        //Reservieren Button
         Button reservierenButton = new Button("Reservieren", VaadinIcons.ENTER);
         reservierenButton.setEnabled(false);
         reservierenButton.addClickListener(new Button.ClickListener() {
@@ -60,11 +61,11 @@ public class MainView extends VerticalLayout implements View {
                     reservierenButton.setEnabled(false);
                 }
                 selektiert = selection.getValue();
-                UI.getCurrent().addWindow( new AutoWindow(selektiert, userDTO) );
+                UI.getCurrent().addWindow(new AutoWindow(selektiert, userDTO));
             }
         });
 
-        //SearchButton
+        //Suchen Button
         Button searchButton = new Button("Suchen", VaadinIcons.SEARCH);
         searchButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 
@@ -73,6 +74,7 @@ public class MainView extends VerticalLayout implements View {
         comboBox.setPlaceholder("Filtern nach");
         comboBox.setItems("Marke", "Baujahr", "Beschreibung");
         comboBox.setSelectedItem("Marke");
+
         //SelectionListener Tabelle
         grid.addSelectionListener(new SelectionListener<AutoDTO>() {
             @Override
@@ -80,7 +82,6 @@ public class MainView extends VerticalLayout implements View {
                 if (selection.getValue() == null) {
                     reservierenButton.setEnabled(false);
                 } else {
-                    System.out.println("Zeile selektiert: " + selection.getValue());
                     selektiert = selection.getValue();
                     reservierenButton.setEnabled(true);
                 }
@@ -97,12 +98,12 @@ public class MainView extends VerticalLayout implements View {
             }
         });
 
-        //SearchButton Config
+        //SearchButton Konfiguration
         searchButton.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent clickEvent) {
                 suchtext = search.getValue();
-                if(suchtext.equals("")) {
+                if (suchtext.equals("")) {
                     try {
                         list = SearchControlProxy.getInstance().getAnzeigenForSearch(suchtext, comboBox.getValue());
                     } catch (SQLException e) {
@@ -126,11 +127,11 @@ public class MainView extends VerticalLayout implements View {
         horizontalLayout.setComponentAlignment(search, Alignment.MIDDLE_CENTER);
         horizontalLayout.setComponentAlignment(searchButton, Alignment.MIDDLE_CENTER);
 
-        //Darstellen
+        //Darstellung
         this.addComponent(horizontalLayout);
         this.setComponentAlignment(horizontalLayout, Alignment.MIDDLE_CENTER);
     }
-
+    //Suche durchführen
     private void search(TextField search, ComboBox<String> comboBox, Grid<AutoDTO> grid, Button detailButton) {
         if (search.getValue().length() > 1) {
             suchtext = search.getValue();

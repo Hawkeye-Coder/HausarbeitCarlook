@@ -78,7 +78,6 @@ public class AutoView extends VerticalLayout implements View {
                     bearbeitenButton.setEnabled(false);
                     deleteButton.setEnabled(false);
                 } else {
-                    System.out.println("Zeile selektiert: " + selection.getValue());
                     selektiert = selection.getValue();
                     deleteButton.setEnabled(true);
                     bearbeitenButton.setEnabled(true);

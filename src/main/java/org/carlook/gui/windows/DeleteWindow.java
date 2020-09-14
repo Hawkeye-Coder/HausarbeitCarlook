@@ -34,7 +34,7 @@ public class DeleteWindow extends Window {
                 close();
             }
         });
-
+        //Layout erstellen
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.addComponent(okButton);
         horizontalLayout.addComponent(abortButton);

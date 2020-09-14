@@ -26,6 +26,7 @@ public class KundeDAO extends AbstractDAO {
 
     // Aktualisiert die Daten eines Kunden
     public boolean updateKunde(KundeDTO kundeDTO) {
+        //in der Kundentabelle
         String sql = "UPDATE carlook.kunden " +
                 "SET vorname = ?, name = ?, anrede = ? " +
                 "WHERE id = ?;";
@@ -39,6 +40,7 @@ public class KundeDAO extends AbstractDAO {
         } catch (SQLException ex) {
             return false;
         }
+        // in der User Tabelle
         String sql2 = "UPDATE carlook.user " +
                 "SET email = ?, password = ? " +
                 "WHERE id = ? ;";
@@ -57,6 +59,7 @@ public class KundeDAO extends AbstractDAO {
     // Sucht Kunden und User Daten aus der Datenbank
     public KundeDTO getAllDataKunde(UserDTO userDTO) throws SQLException {
         KundeDTO kundeDTO = new KundeDTO(userDTO);
+        //Kundendaten
         String sql = "SELECT * " +
                 "FROM carlook.kunden " +
                 "WHERE id = ? ;";
@@ -84,6 +87,7 @@ public class KundeDAO extends AbstractDAO {
             return null;
 
         }
+        //Userdaten
         String sql2 = "SELECT * " +
                 "FROM carlook.user " +
                 "WHERE id = ? ;";

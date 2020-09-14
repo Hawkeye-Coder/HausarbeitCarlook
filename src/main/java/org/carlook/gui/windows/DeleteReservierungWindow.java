@@ -19,6 +19,7 @@ public class DeleteReservierungWindow extends DeleteWindow {
             @Override
             public void buttonClick(Button.ClickEvent clickEvent) {
                 try {
+                    //Reservierung löschen
                     ReservierungControlProxy.getInstance().deleteReservierung(auto_id, kundeDTO);
                 } catch (ReservierungException e) {
                     Notification.show("DB-Fehler", "Löschen war nicht erfolgreich!", Notification.Type.ERROR_MESSAGE);

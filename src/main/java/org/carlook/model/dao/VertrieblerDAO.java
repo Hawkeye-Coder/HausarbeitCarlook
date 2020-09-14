@@ -64,6 +64,7 @@ public class VertrieblerDAO extends AbstractDAO {
     //Sucht Vertriebler- und Userdaten aus der Datenbank
     public VertrieblerDTO getAllDataVertriebler(UserDTO userDTO) throws SQLException {
         VertrieblerDTO vertrieblerDTO = new VertrieblerDTO(userDTO);
+        //Daten Vertriebler
         String sql = "SELECT * " +
                 "FROM carlook.vertriebler " +
                 "WHERE id = ? ;";
@@ -93,6 +94,7 @@ public class VertrieblerDAO extends AbstractDAO {
             Logger.getLogger((VertrieblerDAO.class.getName())).log(Level.SEVERE, null, ex);
             return null;
         }
+        //Daten User
         String sql2 = "SELECT * " +
                 "FROM carlook.user " +
                 "WHERE id = ? ;";
