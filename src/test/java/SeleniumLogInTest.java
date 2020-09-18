@@ -38,10 +38,10 @@ public class SeleniumLogInTest {
             //Einloggen klicken
             driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[5]/div/div[2]/div/div[5]/div/div[1]/div")).click();
 
-            //Testen ob der Login erfolgreich war
 
-           // driver.wait(1000);
+            //5 Sek Timeout damit die Seite geladen werden kann
             TimeUnit.SECONDS.sleep(5);
+            //Testen ob der Login erfolgreich war
             assertEquals("http://localhost:8080/Carlook/#!profil", driver.getCurrentUrl());
 
         } catch (IllegalMonitorStateException | InterruptedException e) {
